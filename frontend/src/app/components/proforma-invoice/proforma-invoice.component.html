@@ -1,0 +1,201 @@
+<h1 class="text-lg font-medium text-center">
+    {{ billId > 0 ? "Edit" : "Add" }} Proforma Invoice
+  </h1>
+<div class="all">
+  <form nz-form [formGroup]="form" nzLayout="vertical">
+    <div class="grid grid-cols-2">
+      <div class="w-[800px]">
+        <div class="grid grid-cols-2 gap-x-4">
+          <nz-form-item>
+            <nz-form-label nzRequired nzFor="name">Company Name</nz-form-label>
+            <nz-form-control nzErrorTip="Please input Company name">
+              <input nz-input type="text" formControlName="consigneeName" />
+            </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+            <nz-form-label nzRequired>Date</nz-form-label>
+            <nz-form-control nzErrorTip="Please select date!">
+              <nz-date-picker
+                type="Date"
+                formControlName="Date"
+                class="w-full"
+              ></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+            <nz-form-label nzRequired>Name</nz-form-label>
+            <nz-form-control nzErrorTip="Please enter the name!">
+              <input nz-input type="text" formControlName="CustomerName" />
+            </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+            <nz-form-label nzRequired>PO NO</nz-form-label>
+            <nz-form-control nzErrorTip="Please select GSTin!">
+              <input nz-input type="text" formControlName="PONO" />
+            </nz-form-control>
+          </nz-form-item>
+  
+          <!-- <nz-form-item>
+            <nz-form-label nzRequired>GST IN</nz-form-label>
+            <nz-form-control nzErrorTip="Please select Purchase Order No!">
+              <input nz-input type="text" formControlName="purchaseOrderNo" />
+            </nz-form-control>
+          </nz-form-item> -->
+          
+        </div>
+        
+
+        <div class="items">
+          <h3 class="text-lg font-medium">Items :</h3> 
+          <ng-container
+            *ngFor="let _ of productsForm.controls; index as i"
+            formArrayName="goods"
+          >
+            <div [formGroupName]="i" class="flex items-center w-full">
+              <div class="grid grid-cols-3 gap-x-8 w-full">
+                <nz-form-item>
+                  <nz-form-label nzRequired>Model Number</nz-form-label>
+                  <nz-form-control nzErrorTip="Please enter description!">
+                    <input nz-input formControlName="model" />
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                  <nz-form-label nzRequired>Serial No.</nz-form-label>
+                  <nz-form-control nzErrorTip="Please enter description!">
+                    <input nz-input formControlName="serialNumber" />
+                  </nz-form-control>
+                </nz-form-item>
+                
+                <nz-form-item>
+                  <nz-form-label nzRequired>Spare</nz-form-label>
+                  <nz-form-control nzErrorTip="Please enter description!">
+                    <input nz-input formControlName="spare" />
+                  </nz-form-control>
+                </nz-form-item>
+                <!-- <nz-form-item>
+                  <nz-form-label nzRequired>Delivery</nz-form-label>
+                  <nz-form-control nzErrorTip="Please enter description!">
+                    <input nz-input formControlName="delivery" />
+                  </nz-form-control>
+                </nz-form-item> -->
+                <nz-form-item>
+                  <nz-form-label nzRequired>Quantity</nz-form-label>
+                  <nz-form-control nzErrorTip="Please select quantity!">
+                    <nz-input-number formControlName="quantity" class="w-full">
+                    </nz-input-number>
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-label nzRequired>Amount</nz-form-label>
+                  <nz-form-control nzErrorTip="Please select total amount!">
+                    <nz-input-number formControlName="amount" class="w-full">
+                    </nz-input-number>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <span
+                class="text-red-400 text-base cursor-pointer self-center place-self-start mt-2"
+                nz-icon
+                nzType="delete"
+                nzTheme="outline"
+                (click)="productsForm.removeAt(i)"
+                *ngIf="productsForm.length > 1"
+              ></span>
+            </div>
+          </ng-container>
+          <div class="flex justify-end">
+            <button nz-button [nzType]="'primary'"
+            (click)="productsForm.push(createProductsForm())">
+              Add Items
+            </button>
+          </div>
+        </div>
+        <nz-form-item>
+          <nz-form-label>Address</nz-form-label>
+          <nz-form-control nzErrorTip="Please enter the address!">
+            <textarea nz-input type="text" formControlName="Address"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+  
+        
+  
+        <div class="flex gap-4">
+          <button
+            nz-button
+            [nzType]="'primary'"
+            class="flex-grow"
+            (click)="submit()"
+          >
+            {{ billId > 0 ? "Save" : "Add" }}
+          </button>
+          <button
+            nz-button
+            [nzType]="'default'"
+            class="flex-grow"
+            [routerLink]="['/transport-bill']"
+          >
+            cancel
+          </button>
+        </div>
+      </div>
+      <!-- <div>
+        <h3 class="text-lg font-medium">Items:</h3>
+        <ng-container
+          *ngFor="let _ of productsForm.controls; index as i"
+          formArrayName="goods"
+        >
+          <div [formGroupName]="i" class="flex items-center w-full">
+            <div class="grid grid-cols-3 gap-x-4 w-full">
+              <nz-form-item>
+                <nz-form-label nzRequired>Spare</nz-form-label>
+                <nz-form-control nzErrorTip="Please select description!">
+                  <input nz-input formControlName="description" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzRequired>Quantity</nz-form-label>
+                <nz-form-control nzErrorTip="Please select quantity!">
+                  <nz-input-number formControlName="quantity" class="w-full">
+                  </nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzRequired>Amount</nz-form-label>
+                <nz-form-control nzErrorTip="Please select total amount!">
+                  <nz-input-number formControlName="totalAmount" class="w-full">
+                  </nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <span
+              class="text-red-400 text-base cursor-pointer self-center place-self-start mt-2"
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+              (click)="productsForm.removeAt(i)"
+              *ngIf="productsForm.length > 1"
+            ></span>
+          </div>
+        </ng-container>
+        <div class="flex justify-end">
+          <button nz-button (click)="productsForm.push(createProductsForm())">
+            Add Goods
+          </button>
+        </div>
+      </div> -->
+    </div>
+  </form>
+</div>
+   
+
+
+
+
+
+
+
+ 

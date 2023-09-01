@@ -1,0 +1,121 @@
+<div class="flex gap-10">
+  <div class="flex-grow">
+    <div class="flex items-center justify-between mb-4">
+      <button nz-button [routerLink]="['/item-master/edit', -1]">
+        <span nz-icon nzType="plus"></span>
+        Add Item
+      </button>
+      <nz-input-group [nzSuffix]="suffixIconSearch" class="w-[220px]">
+        <input
+          type="text"
+          nz-input
+          placeholder="Search..."
+          [(ngModel)]="search"
+        />
+      </nz-input-group>
+    </div>
+    <nz-table
+      #basicTable
+      nzSize="small"
+      [nzData]="items"
+      [nzLoading]="isLoading"
+      [nzShowPagination]="false"
+      [nzFrontPagination]="false"
+      [(nzPageSize)]="pageSize"
+      [(nzPageIndex)]="pageIndex"
+      (nzQueryParams)="getItems($event)"
+      class="shadow rounded"
+    >
+      <thead>
+        <tr>
+          <th>Job Work</th>
+          <th>Purpose</th>
+          <th>Category</th>
+          <th>Unit of Measure</th>
+          <th>Price</th>
+          <th>Unit</th>
+          <th>Reason</th>
+          <th>HTA</th>
+          <th>Quantity</th>
+          <th>HSN</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of basicTable.data">
+          <td>{{ s.jobWork }}</td>
+          <td>{{ s.purpose }}</td>
+          <td>{{ s.category }}</td>
+          <td>{{ s.uom }}</td>
+          <td>{{ s.price }}</td>
+          <td>{{ s.unit }}</td>
+          <td>{{ s.reason }}</td>
+          <td>{{ s.hta }}</td>
+          <td>{{ s.quantity }}</td>
+          <td>{{ s.hsn }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                green: s.status === 'ACTIVE',
+                red: s.status === 'INACTIVE'
+              }"
+            >
+              {{ s.status }}
+            </span>
+          </td>
+          <td>
+            <div class="flex gap-4 items-center">
+              <span
+                class="text-red-400 text-base cursor-pointer"
+                nz-icon
+                nzType="delete"
+                nzTheme="outline"
+                nz-tooltip
+                nzTooltipTitle="Delete"
+                nz-popconfirm
+                nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Are you sure delete this customer?"
+                (nzOnConfirm)="deleteItem(s.id)"
+              ></span>
+              <span
+                class="text-blue-400 text-base cursor-pointer"
+                nz-icon
+                nzType="edit"
+                nzTheme="outline"
+                nz-tooltip
+                nzTooltipTitle="Edit"
+                [routerLink]="['/item-master/edit', s.id]"
+              ></span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <div class="flex justify-end mt-4">
+      <nz-pagination
+        nzSize="small"
+        [(nzPageIndex)]="pageIndex"
+        [(nzPageSize)]="pageSize"
+        [nzTotal]="total"
+        [nzShowTotal]="rangeTemplate"
+        nzShowSizeChanger
+      ></nz-pagination>
+    </div>
+  </div>
+  <!-- <div class="shadow border border-gray-100 rounded p-6 self-start">
+    <app-customer-form
+      [(customerId)]="customerId"
+      (onFormSubmit)="getCustomers()"
+    ></app-customer-form>
+  </div> -->
+</div>
+
+<ng-template #rangeTemplate let-range="range" let-total>
+  {{ range[0] }}-{{ range[1] }} of {{ total }} items
+</ng-template>
+
+<ng-template #suffixIconSearch>
+  <span nz-icon nzType="search"></span>
+</ng-template>

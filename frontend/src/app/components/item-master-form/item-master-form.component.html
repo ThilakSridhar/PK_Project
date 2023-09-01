@@ -1,0 +1,116 @@
+<h1 class="text-lg font-medium mb-4">{{ itemId > 0 ? "Edit" : "Add" }} Item</h1>
+<form nz-form [formGroup]="form" nzLayout="vertical">
+  <div class="grid grid-cols-3 gap-x-4">
+    <nz-form-item>
+      <nz-form-label nzRequired>Job Work</nz-form-label>
+      <nz-form-control nzErrorTip="Please select the job work!">
+        <nz-select formControlName="jobWork" nzPlaceHolder="Job Work">
+          <nz-option nzLabel="Consumables" nzValue="Consumables"></nz-option>
+          <nz-option nzLabel="maintenance" nzValue="maintenance"></nz-option>
+          <nz-option nzLabel="service" nzValue="service"></nz-option>
+          <nz-option nzLabel="raw material" nzValue="raw material"></nz-option>
+          <nz-option
+            nzLabel="packing material"
+            nzValue="packing material"
+          ></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Purpose</nz-form-label>
+      <input
+        nz-input
+        placeholder="Purpose"
+        formControlName="purpose"
+        type="text"
+      />
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Category</nz-form-label>
+      <nz-select formControlName="category" nzPlaceHolder="Category">
+        <nz-option nzLabel="Job" nzValue="Job"></nz-option>
+        <nz-option nzLabel="Finished" nzValue="Finished"></nz-option>
+        <nz-option nzLabel="Consumables" nzValue="Consumables"></nz-option>
+      </nz-select>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Uom</nz-form-label>
+      <nz-select formControlName="uom" nzPlaceHolder="Unit of measure">
+        <nz-option nzLabel="nos" nzValue="nos"></nz-option>
+        <nz-option nzLabel="lts" nzValue="lts"></nz-option>
+        <nz-option nzLabel="kgs" nzValue="kgs"></nz-option>
+      </nz-select>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Price</nz-form-label>
+      <nz-form-control nzErrorTip="Please enter the price">
+        <nz-input-number
+          nzPlaceHolder="Enter Price"
+          class="w-full"
+          formControlName="price"
+        ></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Unit</nz-form-label>
+      <nz-form-control>
+        <nz-select formControlName="unit" nzPlaceHolder="please select a unit">
+          <nz-option nzLabel="PDC" nzValue="PDC"></nz-option>
+          <nz-option nzLabel="TVK" nzValue="TVK"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>HTA</nz-form-label>
+      <nz-form-control>
+        <input
+          formControlName="hta"
+          nz-input
+          placeholder="ABCD0123"
+          type="number"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Reason</nz-form-label>
+      <nz-form-control>
+        <input formControlName="reason" nz-input type="text" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Quantity</nz-form-label>
+      <nz-form-control>
+        <nz-input-number
+          nzPlaceHolder="Enter quantity"
+          class="w-full"
+          formControlName="quantity"
+        ></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>HSN</nz-form-label>
+      <nz-form-control>
+        <input
+          formControlName="hsn"
+          nz-input
+          placeholder="ABCD0123"
+          type="text"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="flex gap-4">
+    <button nz-button [nzType]="'primary'" class="flex-grow" (click)="submit()">
+      {{ itemId > 0 ? "Save" : "Add" }}
+    </button>
+    <button
+      nz-button
+      [nzType]="'default'"
+      class="flex-grow"
+      (click)="itemId = -1; form.reset()"
+    >
+      <!-- *ngIf="itemId > 0" -->
+      cancel
+    </button>
+  </div>
+</form>
