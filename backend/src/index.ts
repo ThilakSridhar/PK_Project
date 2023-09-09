@@ -22,6 +22,7 @@ import {
   ProformaRoutes,
   QuotationRoutes,
   BankDetailsRoutes,
+  BankTransactionRoutes,
 } from "./routes";
 
 import {
@@ -49,6 +50,7 @@ import {
   InvoiceMaster,
   InvoiceMasterItem,
   BankDetails,
+  BankTransaction,
 } from "./models";
 
 import { verifyToken } from "./middleware";
@@ -102,6 +104,7 @@ QuotationItem.sync();
 InvoiceMaster.sync();
 InvoiceMasterItem.sync();
 BankDetails.sync();
+BankTransaction.sync();
 
 Customer.sync();
 Vendor.sync();
@@ -127,7 +130,9 @@ app.use("/api/ot", verifyToken, new OtRoutes().getRouter());
 app.use("/api/proforma", verifyToken, new ProformaRoutes().getRouter());
 app.use("/api/quotation", verifyToken, new QuotationRoutes().getRouter());
 app.use("/api/InvoiceMaster", verifyToken, new InvoiceMasterRoutes().getRouter());
-app.use("/api/BankDetails",  new BankDetailsRoutes().getRouter());
+app.use("/api/BankDetails" ,  new BankDetailsRoutes().getRouter());
+app.use("/api/BankTransaction" ,  new BankDetailsRoutes().getRouter());
+
 
 app.use(
   "/api/transport-bill",

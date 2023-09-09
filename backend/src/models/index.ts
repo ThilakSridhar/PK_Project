@@ -23,4 +23,6 @@ export * from "./quotation-item"
 export * from "./invoice-master"
 export * from "./invoice-master-item"
 export * from "./bank-details"
+export * from "./bank-transaction"
+
 
