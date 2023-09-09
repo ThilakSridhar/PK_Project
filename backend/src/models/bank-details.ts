@@ -11,7 +11,7 @@ BankDetails.init(
             primaryKey: true,
             allowNull: false,
         },
-        bankname: {
+        bankName: {
             type: DataTypes.STRING,
             allowNull: false,
         },
