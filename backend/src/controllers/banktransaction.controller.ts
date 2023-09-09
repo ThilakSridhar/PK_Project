@@ -1,39 +1,64 @@
 import { Request, Response } from "express";
-import { BankTransactionService } from "../services"; // Assuming you have a BankTransactionService
-import { BankTransaction } from "../models"; // Assuming you have a BankTransaction model
+import { BankDetailsService, BankTransactionService } from "../services"; // Assuming you have a BankTransactionService
+import { BankDetails, BankTransaction } from "../models"; // Assuming you have a BankTransaction model
 import { getPagingData } from "../helpers";
 import { sequelize } from "../db";
 import { Op } from "sequelize";
 
 export class BankTransactionController {
     private bankTransactionService: BankTransactionService;
+    private bankDetailsService: BankDetailsService;
 
     constructor() {
         this.bankTransactionService = new BankTransactionService(BankTransaction);
+        this.bankDetailsService = new BankDetailsService(BankDetails);
     }
 
     options = {}; // You can add any options you need here
 
     getPaged(req: Request, res: Response) {
         const { page, size } = req.query;
-        this.bankTransactionService
-            .getPaged(page, size, this.options)
-            .then((bankTransactions) =>
-                res.status(200).json(getPagingData(bankTransactions))
-            );
+        const bankTransactions = this.bankTransactionService
+            .getPaged(page, size, this.options);
+            
+        this.mergeBankDetails(bankTransactions)
+            .then((mergedData) => {
+                if(mergedData.error) {
+                    res.status(404).json(mergedData.error);
+                } else {
+                    res.status(200).json(getPagingData(mergedData.resData))
+                }
+            })
+
+        
     }
 
-    getAll(req: Request, res: Response) {
-        this.bankTransactionService
-            .getAll()
-            .then((bankTransactions) => res.status(200).json(bankTransactions));
+    async getAll(req: Request, res: Response) {
+        const bankTransactions: any = await this.bankTransactionService.getAll();
+        this.mergeBankDetails(bankTransactions)
+            .then((mergedData) => {
+                if(mergedData.error) {
+                    res.status(404).json(mergedData.error);
+                } else {
+                    res.status(200).json(mergedData.resData)
+                }
+            })
     }
 
     getById(req: Request, res: Response) {
         this.bankTransactionService
             .get(req.params.id, this.options)
             .then((bankTransaction) => {
-                if (bankTransaction) res.status(200).json(bankTransaction);
+                if (bankTransaction) {
+                    this.mergeBankDetails(bankTransaction)
+                        .then((mergedData) => {
+                            if(mergedData.error) {
+                                res.status(404).json(mergedData.error);
+                            } else {
+                                res.status(200).json(mergedData.resData)
+                            }
+                        });
+                }
                 else
                     res.status(404).json({
                         message: `BankTransaction id:${req.params.id} does not exist`,
@@ -42,13 +67,12 @@ export class BankTransactionController {
     }
 
     async upsert(req: Request, res: Response) {
-        let { id, date, accountType, bankName, withdrawID, amount, description } = req.body;
+        let { id, date, bank_id, withdraw_id, amount, description } = req.body;
 
         let bankTransaction: any = {
             date,
-            accountType,
-            bankName,
-            withdrawID,
+            bank_id,
+            withdraw_id,
             amount,
             description,
         };
@@ -87,5 +111,47 @@ export class BankTransactionController {
                     message: `BankTransaction id:${req.params.id} does not exist`,
                 });
         });
+    }
+
+    async mergeBankDetails(bankTransactions: any) {
+        var resData: Array<any> = [];
+        var error: any = null;
+
+        if(bankTransactions.map) {
+            await Promise.all(bankTransactions.map(async (bankTransaction: any) => {
+                const bankDetails = await this.bankDetailsService.get(
+                    bankTransaction.dataValues.bank_id,
+                    this.options
+                );
+    
+                if (bankDetails) {
+                    resData.push({
+                        ...bankDetails.dataValues,
+                        ...bankTransaction.dataValues,
+                    });
+                } else {
+                    error = `BankDetails id:${bankTransaction.dataValues.bank_id} does not exist`;
+                }
+            }));
+        } else {
+            const bankDetails = await this.bankDetailsService.get(
+                bankTransactions.dataValues.bank_id,
+                this.options
+            );
+
+            if (bankDetails) {
+                resData = {
+                    ...bankDetails.dataValues,
+                    ...bankTransactions.dataValues,
+                };
+            } else {
+                error = `BankDetails id:${bankTransactions.dataValues.bank_id} does not exist`;
+            }
+        }
+
+        return {
+            resData,
+            error
+        }
     }
 }
