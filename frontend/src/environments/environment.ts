@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:3000/api",
+  apiUrl: "https://fictional-bassoon-p56xgjxq94ph6p-3000.app.github.dev/api",
 };
 
 /*

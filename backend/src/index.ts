@@ -56,7 +56,7 @@ import { InvoiceMasterRoutes } from "./routes/invoicemaster.routes";
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:4200" }));
+app.use(cors({ origin: "https://fictional-bassoon-p56xgjxq94ph6p-4200.app.github.dev" }));
 
 app.use(express.static(__dirname + "/files", { index: false }));
 
