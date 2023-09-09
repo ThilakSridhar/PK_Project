@@ -42,13 +42,14 @@ export class BankDetailsController {
     }
 
     async upsert(req: Request, res: Response) {
-        let { id, bankName, accountName, accountNo, branch } = req.body;
+        let { id, bank_name, account_name, account_no, branch, account_type } = req.body;
 
         let bankDetails: any = {
-            bankName,
-            accountName,
-            accountNo,
+            bank_name,
+            account_name,
+            account_no,
             branch,
+            account_type,
         };
         if (id) bankDetails = { ...bankDetails, id };
 

@@ -11,15 +11,15 @@ BankDetails.init(
             primaryKey: true,
             allowNull: false,
         },
-        bankName: {
+        bank_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        accountName: {
+        account_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        accountNo: {
+        account_no: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -27,10 +27,14 @@ BankDetails.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        account_type: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     },
     {
         sequelize,
-        modelName: "bank_details",
+        modelName: "BankDetails",
         timestamps: false,
         underscored: true,
     }

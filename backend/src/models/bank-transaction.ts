@@ -1,7 +1,10 @@
 import { sequelize } from "../db";
 import { DataTypes, Model } from "sequelize";
+import BankDetails from "./bank-details";
 
-export class BankTransaction extends Model {}
+export class BankTransaction extends Model {
+    [x: string]: any;
+}
 
 BankTransaction.init(
     {
@@ -16,15 +19,15 @@ BankTransaction.init(
         //     type: DataTypes.DATE,
         //     allowNull: false,
         // },
-        accountType: {
-            type: DataTypes.STRING,
+        bank_id: {
+            type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: BankDetails,
+                key: "id",
+            },
         },
-        bankname: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        withdrawID: {
+        withdraw_id: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -39,7 +42,7 @@ BankTransaction.init(
     },
     {
         sequelize,
-        modelName: "bank_transaction",
+        modelName: "BankTransaction",
         timestamps: false,
         underscored: true,
     }
