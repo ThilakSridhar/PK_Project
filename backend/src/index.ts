@@ -21,6 +21,7 @@ import {
   ItemMasterRoutes,
   ProformaRoutes,
   QuotationRoutes,
+  BankDetailsRoutes,
 } from "./routes";
 
 import {
@@ -46,7 +47,8 @@ import {
   ProformaItem,
   QuotationItem,
   InvoiceMaster,
-  InvoiceMasterItem
+  InvoiceMasterItem,
+  BankDetails,
 } from "./models";
 
 import { verifyToken } from "./middleware";
@@ -99,6 +101,7 @@ Quotation.sync();
 QuotationItem.sync();
 InvoiceMaster.sync();
 InvoiceMasterItem.sync();
+BankDetails.sync();
 
 Customer.sync();
 Vendor.sync();
@@ -124,6 +127,8 @@ app.use("/api/ot", verifyToken, new OtRoutes().getRouter());
 app.use("/api/proforma", verifyToken, new ProformaRoutes().getRouter());
 app.use("/api/quotation", verifyToken, new QuotationRoutes().getRouter());
 app.use("/api/InvoiceMaster", verifyToken, new InvoiceMasterRoutes().getRouter());
+app.use("/api/BankDetails",  new BankDetailsRoutes().getRouter());
+
 app.use(
   "/api/transport-bill",
   verifyToken,

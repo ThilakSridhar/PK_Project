@@ -13,3 +13,4 @@ export * from "./itemMaster.service";
 export * from "./proforma.service"
 export * from "./quotation.service"
 export * from "./invoicemaster.service"
+export * from "./bankdetails.service"

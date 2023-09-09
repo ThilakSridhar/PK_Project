@@ -15,3 +15,4 @@ export * from "./itemMaster.controller";
 export * from "./proforma.controller";
 export * from "./quotation.controller";
 export * from "./invoicemaster.controller"
+export * from "./bankdetails.controller"

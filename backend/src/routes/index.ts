@@ -15,3 +15,5 @@ export * from "./itemMaster.routes";
 export * from "./proforma.routes"
 export * from "./quotation.routes"
 export * from "./inventory.routes"
+export * from "./invoicemaster.routes"
+export * from "./bankdetails.routes"
