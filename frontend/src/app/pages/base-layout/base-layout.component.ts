@@ -130,6 +130,33 @@ export class BaseLayoutComponent implements OnInit {
           ],
         },
         {
+          level: 1,
+          title: "Bank",
+          icon: "bank",
+          children: [
+              {
+                  level: 2,
+                  title: "Add New Bank",
+                  link: "/add-bank",
+              },
+              {
+                  level: 2,
+                  title: "Manage Bank",
+                  link: "/manage-bank",
+              },
+              {
+                  level: 2,
+                  title: "Bank Transaction",
+                  link: "/transaction-bank",
+              },
+              {
+                  level: 2,
+                  title: "Bank Ledger",
+                  link: "/ledger-bank",
+              },
+          ],
+        },
+        {
           title: "Item Master",
           icon: "database",
           link: "/item-master",

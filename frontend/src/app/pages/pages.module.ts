@@ -25,6 +25,10 @@ import { VendorsComponent } from "./vendors/vendors.component";
 import { GstComponent } from "./gst/gst.component";
 import { ItemMasterComponent } from './item-master/item-master.component';
 import { GrnComponent } from './grn/grn.component';
+import { AddbankComponent } from './addbank/addbank.component';
+import { ManagebankComponent } from './managebank/managebank.component';
+import { BankTransactionComponent } from './bank-transaction/bank-transaction.component';
+import { BankledgerComponent } from './bankledger/bankledger.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { GrnComponent } from './grn/grn.component';
     GstComponent,
     ItemMasterComponent,
     GrnComponent,
+    AddbankComponent,
+    ManagebankComponent,
+    BankTransactionComponent,
+    BankledgerComponent,
   ],
   imports: [
     CommonModule,

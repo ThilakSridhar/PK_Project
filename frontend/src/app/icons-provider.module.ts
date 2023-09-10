@@ -24,7 +24,10 @@ import {
   DatabaseOutline,
   LogoutOutline,
   FileDoneOutline,
+  BankOutline,
 } from "@ant-design/icons-angular/icons";
+
+// <span nz-icon nzType="bank" nzTheme="outline"></span>
 
 const icons = [
   AppstoreOutline,
@@ -49,6 +52,7 @@ const icons = [
   DatabaseOutline,
   LogoutOutline,
   FileDoneOutline,
+  BankOutline,
 ];
 
 @NgModule({

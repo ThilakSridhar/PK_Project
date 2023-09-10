@@ -1,0 +1,124 @@
+<h1 class="text-lg font-medium text-center">
+    Add Bank
+  </h1>
+<div class="all">
+      <div class="w-[900px]">
+        <div class="grid grid-cols-1 gap-x-100">
+        <form nz-form  >    
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="BankName">Bank Name</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Bank Name!">
+                  <input nz-input placeholder="Enter the Bank Name" type="text" formControlName="bank_name" id="bank_name" />
+                 </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CName">A/C Name</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid A/C Name!">
+                  <input nz-input placeholder="Enter the A/CName" type="text" formControlName="account_name" id="account_name" />
+                 </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">A/C number</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid A/C number!">
+                  <input nz-input placeholder="Enter the A/C No" type="number" formControlName="account_no" id="account_no" />
+                 </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">A/C Type</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid A/C type!">
+                  <input nz-input placeholder="Enter the A/C type" type="number" formControlName="account_type" id="account_type" />
+                 </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="branch">Branch</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid branch!">
+                  <input nz-input placeholder="Enter the branch" type="text" formControlName="branch" id="branch" />
+                 </nz-form-control>
+            </nz-form-item>
+
+
+
+
+
+
+
+
+
+
+        </form>
+
+
+
+          <!-- <nz-form-item>
+            <nz-form-label nzRequired class="custom-label">Bank Name</nz-form-label>
+            <nz-form-control nzErrorTip="Please input Bank name">
+              <input nz-input type="text" formControlName="CompanyName" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired class="custom-label">A/C Name</nz-form-label>
+            <nz-form-control nzErrorTip="Please enter the A/C name!">
+              <input nz-input type="text" formControlName="CustomerName" />
+            </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+            <nz-form-label nzRequired class="custom-label">A/C Number</nz-form-label>
+            <nz-form-control nzErrorTip="Please select GSTin!">
+              <input nz-input type="number" formControlName="PONO" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired class="custom-label">Branch</nz-form-label>
+            <nz-form-control nzErrorTip="Please enter the Branch name!">
+              <input nz-input type="text" formControlName="CustomerName" />
+            </nz-form-control>
+          </nz-form-item> -->
+  
+          
+          
+        </div>
+        
+
+    
+        
+  
+        <div class="flex gap-10">
+          <button
+            nz-button
+            [nzType]="'primary'"
+            class="flex-grow"
+            size="1px"
+            
+          >Add
+            <!-- {{ billId > 0 ? "Save" : "Add" }}  (click)="submit()"  -->
+          </button>
+          <button
+            nz-button
+            [nzType]="'default'"
+            class="flex-grow"
+            [routerLink]="['/proforma-main']"
+          >
+            cancel
+          </button>
+        </div>
+      </div>
+      
+   
+  <!-- </form> -->
+</div>
+   
+
+
+
+
+
+
+
+ 

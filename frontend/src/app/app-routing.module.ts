@@ -26,6 +26,10 @@ import { ProformaInvoiceComponent } from "./components/proforma-invoice/proforma
 import { QuotationInvoiceComponent } from "./components/quotation-invoice/quotation-invoice.component";
 import { InoviceMasterComponent } from "./components/inovice-master/inovice-master.component";
 import { InvoiceMasterMainComponent } from "./pages/invoice-master-main/invoice-master-main.component";
+import { BankTransactionComponent } from "./pages/bank-transaction/bank-transaction.component";
+import { ManagebankComponent } from "./pages/managebank/managebank.component";
+import { AddbankComponent } from "./pages/addbank/addbank.component";
+import { BankledgerComponent } from "./pages/bankledger/bankledger.component";
 
 const routes: Routes = [
   {
@@ -80,6 +84,26 @@ const routes: Routes = [
       {
         path: "proforma-invoice-edit",
         component: ProformaInvoiceComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "add-bank",
+        component: AddbankComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "manage-bank",
+        component: ManagebankComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "transaction-bank",
+        component: BankTransactionComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "ledger-bank",
+        component: BankledgerComponent,
         canActivate: [AuthGuard],
       },
       {
