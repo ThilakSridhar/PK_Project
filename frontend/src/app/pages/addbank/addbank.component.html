@@ -4,7 +4,7 @@
 <div class="all">
       <div class="w-[900px]">
         <div class="grid grid-cols-1 gap-x-100">
-        <form nz-form  >    
+  <form nz-form [formGroup]="addbankForm" >    
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="BankName">Bank Name</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Bank Name!">
@@ -49,7 +49,7 @@
 
 
 
-        </form>
+        <!-- </form> -->
 
 
 
@@ -83,7 +83,7 @@
   
           
           
-        </div>
+        <!-- </div> -->
         
 
     
@@ -95,9 +95,9 @@
             [nzType]="'primary'"
             class="flex-grow"
             size="1px"
-            
-          >Add
-            <!-- {{ billId > 0 ? "Save" : "Add" }}  (click)="submit()"  -->
+            (click)="submitBank()" 
+          >
+            {{ bankDetailId > 0 ? "Save" : "Add" }}  
           </button>
           <button
             nz-button
@@ -108,10 +108,12 @@
             cancel
           </button>
         </div>
-      </div>
       
    
-  <!-- </form> -->
+  
+  </form>
+</div>
+</div>
 </div>
    
 

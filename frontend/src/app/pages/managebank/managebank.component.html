@@ -1,109 +1,113 @@
-<h1 class="text-lg font-medium text-center">
-    Bank List
-  </h1>
-
-<div class="flex gap-10" @fade>
-    <div class="flex-grow">
-      <div class="flex items-center justify-end mb-4">
-        <!-- <nz-input-group [nzSuffix]="suffixIconSearch" class="w-[220px]">
-          <input type="text" nz-input placeholder="Search..." 
+<div class="flex gap-10">
+  <div class="flex-grow">
+    <div class="flex items-center justify-between mb-4">
+      <button nz-button [routerLink]="['/vendor/edit', -1]">
+        <span nz-icon nzType="plus"></span>
+        Add Vendor
+      </button>
+      <nz-input-group [nzSuffix]="suffixIconSearch" class="w-[220px]">
+        <input
+          type="text"
+          nz-input
+          placeholder="Search..."
           [(ngModel)]="search"
-          />
-        </nz-input-group> -->
-        <!-- <button
-          nz-button
-          nzType="primary"
-          routerLink="/proforma-invoice-edit"
-        >
-          <span nz-icon nzType="plus" nzTheme="outline"></span>Ne
-        </button> -->
-      </div>
-      <!-- <nz-table
-        #basicTable
+        />
+      </nz-input-group>
+    </div>
+    <nz-table
+      #basicTable
+      nzSize="small"
+      [nzData]="vendors"
+      [nzLoading]="isLoading"
+      [nzShowPagination]="false"
+      [nzFrontPagination]="false"
+      [(nzPageSize)]="pageSize"
+      [(nzPageIndex)]="pageIndex"
+      (nzQueryParams)="getVendors($event)"
+      class="shadow rounded"
+    >
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Bank Name</th>
+          <th>A/c Name</th>
+          <th>A/c Number</th>
+          <th>Branch</th>
+          <th>Balance</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bank of banks">
+          <td>{{ bank.bank_name }}</td>
+          <td>{{ bank.account_name }}</td>
+          <td>{{ bank.account_no }}</td>
+          <td>{{ bank. }}</td>
+          <td>{{ bank.bankignee }}</td>
+          <td>{{ bank.bank }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                green: s.status === 'ACTIVE',
+                red: s.status === 'INACTIVE'
+              }"
+            >
+              {{ s.status }}
+            </span>
+          </td>
+          <td>
+            <div class="flex gap-4 items-center">
+              <span
+                class="text-red-400 text-base cursor-pointer"
+                nz-icon
+                nzType="delete"
+                nzTheme="outline"
+                nz-tooltip
+                nzTooltipTitle="Delete"
+                nz-popconfirm
+                nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Are you sure delete this customer?"
+                (nzOnConfirm)="deleteVendor(s.id)"
+              ></span>
+              <span
+                class="text-blue-400 text-base cursor-pointer"
+                nz-icon
+                nzType="edit"
+                nzTheme="outline"
+                nz-tooltip
+                nzTooltipTitle="Edit"
+                [routerLink]="['/vendor/edit', s.id]"
+              ></span>
+              <!-- (click)="customerId = s.id" -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <div class="flex justify-end mt-4">
+      <nz-pagination
         nzSize="small"
-        [nzData]="transportBill"
-        [nzLoading]="isLoading"
-        [nzShowPagination]="false"
-        [(nzPageSize)]="pageSize"
         [(nzPageIndex)]="pageIndex"
-        (nzQueryParams)="getTransportBill($event)"
-        class="shadow rounded"
-      > -->
-      <nz-table>
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Bank Name</th>
-            <th>A/c Name</th>
-            <th>A/c Number</th>
-            <th>Branch</th>
-            <th>Balance</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr *ngFor="let t of basicTable.data">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td>
-              <div class="flex gap-4 items-center">
-                <span
-                  class="text-red-400 text-base cursor-pointer"
-                  nz-icon
-                  nzType="delete"
-                  nzTheme="outline"
-                  nz-tooltip
-                  nzTooltipTitle="Delete"
-                  nz-popconfirm
-                  nzPopconfirmPlacement="bottom"
-                  nzPopconfirmTitle="Are you sure delete this bill?"
-                  (nzOnConfirm)="deleteTransportBill(t.id)"
-                ></span>
-                <span
-                  class="text-blue-400 text-base cursor-pointer"
-                  nz-icon
-                  nzType="edit"
-                  nzTheme="outline"
-                  nz-tooltip
-                  nzTooltipTitle="Edit"
-                  [routerLink]="['/transport-bill-edit', t.id]"
-                ></span>
-                <span
-                  class="text-blue-400 text-base cursor-pointer"
-                  nz-icon
-                  nzType="printer"
-                  nzTheme="outline"
-                  [routerLink]="['/bill-layout', t.id]"
-                ></span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-      <div class="flex justify-end mt-4">
-        <nz-pagination
-          nzSize="small"
-          [(nzPageIndex)]="pageIndex"
-          [(nzPageSize)]="pageSize"
-          [nzTotal]="total"
-          [nzShowTotal]="rangeTemplate"
-          nzShowSizeChanger
-        ></nz-pagination> -->
-      <!-- </div>
-    </div> -->
-  </nz-table>
+        [(nzPageSize)]="pageSize"
+        [nzTotal]="total"
+        [nzShowTotal]="rangeTemplate"
+        nzShowSizeChanger
+      ></nz-pagination>
+    </div>
   </div>
-  
-  <ng-template #rangeTemplate let-range="range" let-total>
-    {{ range[0] }}-{{ range[1] }} of {{ total }} items
-  </ng-template>
-  
-  <ng-template #suffixIconSearch>
-    <span nz-icon nzType="search"></span>
-  </ng-template>
-  
+  <!-- <div class="shadow border border-gray-100 rounded p-6 self-start">
+    <app-customer-form
+      [(customerId)]="customerId"
+      (onFormSubmit)="getCustomers()"
+    ></app-customer-form>
+  </div> -->
+</div>
+
+<ng-template #rangeTemplate let-range="range" let-total>
+  {{ range[0] }}-{{ range[1] }} of {{ total }} items
+</ng-template>
+
+<ng-template #suffixIconSearch>
+  <span nz-icon nzType="search"></span>
+</ng-template>
