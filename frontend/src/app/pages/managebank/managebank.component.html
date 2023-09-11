@@ -43,22 +43,6 @@
           <td>{{ bank.account_name }}</td>
           <td>{{ bank.account_no }}</td>
           <td>{{ bank.branch }}</td>
-<<<<<<< Updated upstream
-          <td>{{ bank.account_type }}</td>
-          
-          <td>
-            <span
-              class="badge"
-              [ngClass]="{
-                green: s.status === 'ACTIVE',
-                red: s.status === 'INACTIVE'
-              }"
-            >
-              {{ s.status }}
-            </span>
-          </td>
-=======
->>>>>>> Stashed changes
           <td>
             <div class="flex gap-4 items-center">
               <span
@@ -70,13 +54,8 @@
                 nzTooltipTitle="Delete"
                 nz-popconfirm
                 nzPopconfirmPlacement="bottom"
-<<<<<<< Updated upstream
                 nzPopconfirmTitle="Are you sure delete this bank?"
-                (nzOnConfirm)="deleteVendor(s.id)"
-=======
-                nzPopconfirmTitle="Are you sure delete this customer?"
                 (nzOnConfirm)="deleteBank(bank.id)"
->>>>>>> Stashed changes
               ></span>
               <span
                 class="text-blue-400 text-base cursor-pointer"
