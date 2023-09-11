@@ -137,7 +137,7 @@ export class BaseLayoutComponent implements OnInit {
               {
                   level: 2,
                   title: "Add New Bank",
-                  link: "/add-bank",
+                  link: "/add-bank/-1",
               },
               {
                   level: 2,
