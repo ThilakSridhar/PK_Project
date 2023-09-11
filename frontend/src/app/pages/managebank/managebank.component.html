@@ -42,9 +42,9 @@
           <td>{{ bank.bank_name }}</td>
           <td>{{ bank.account_name }}</td>
           <td>{{ bank.account_no }}</td>
-          <td>{{ bank. }}</td>
-          <td>{{ bank.bankignee }}</td>
-          <td>{{ bank.bank }}</td>
+          <td>{{ bank.branch }}</td>
+          <td>{{ bank.account_type }}</td>
+          
           <td>
             <span
               class="badge"
@@ -67,7 +67,7 @@
                 nzTooltipTitle="Delete"
                 nz-popconfirm
                 nzPopconfirmPlacement="bottom"
-                nzPopconfirmTitle="Are you sure delete this customer?"
+                nzPopconfirmTitle="Are you sure delete this bank?"
                 (nzOnConfirm)="deleteVendor(s.id)"
               ></span>
               <span

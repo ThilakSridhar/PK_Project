@@ -130,8 +130,8 @@ app.use("/api/ot", verifyToken, new OtRoutes().getRouter());
 app.use("/api/proforma", verifyToken, new ProformaRoutes().getRouter());
 app.use("/api/quotation", verifyToken, new QuotationRoutes().getRouter());
 app.use("/api/InvoiceMaster", verifyToken, new InvoiceMasterRoutes().getRouter());
-app.use("/api/BankDetails" ,  new BankDetailsRoutes().getRouter());
-app.use("/api/BankTransaction" ,  new BankTransactionRoutes().getRouter());
+app.use("/api/BankDetails" ,verifyToken,  new BankDetailsRoutes().getRouter());
+app.use("/api/BankTransaction" ,verifyToken,  new BankTransactionRoutes().getRouter());
 
 
 app.use(
