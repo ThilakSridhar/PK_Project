@@ -113,6 +113,14 @@ export class BankTransactionController {
         });
     }
 
+    async deleteByBankId(id: any) {
+        const rowsDeleted = await BankTransaction.destroy({
+            where: { bank_id: id },
+          });
+
+        return rowsDeleted;
+    }
+
     async mergeBankDetails(bankTransactions: any) {
         var resData: Array<any> = [];
         var error: any = null;

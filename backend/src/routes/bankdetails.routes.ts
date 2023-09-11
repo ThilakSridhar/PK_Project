@@ -12,6 +12,8 @@ export class BankDetailsRoutes {
     }
 
     private routes() {
+        this.router.get("/page", (req, res) => this.controller.getPaged(req, res));
+        
         // Get all Bank Details
         this.router.get("/", (req, res) => this.controller.getAll(req, res));
 

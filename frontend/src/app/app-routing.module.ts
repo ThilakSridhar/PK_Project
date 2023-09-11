@@ -87,7 +87,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: "add-bank",
+        path: "add-bank/:id",
         component: AddbankComponent,
         canActivate: [AuthGuard],
       },

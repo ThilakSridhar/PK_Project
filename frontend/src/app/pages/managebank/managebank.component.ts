@@ -1,13 +1,13 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { environment } from "src/environments/environment";
 
 @Component({
-  selector: "app-manage-bank",
-  templateUrl: "./manage-bank.component.html",
-  styleUrls: ["./manage-bank.component.scss"],
+  selector: "app-managebank",
+  templateUrl: "./managebank.component.html",
+  styleUrls: ["./managebank.component.scss"],
 })
 export class ManagebankComponent implements OnInit {
   bankForm: FormGroup; // Define a FormGroup for your bank form
@@ -37,7 +37,8 @@ export class ManagebankComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private message: NzMessageService,
-    private fb: FormBuilder // Inject FormBuilder
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {
     this.bankForm = this.fb.group({
       bank_name: ["", [Validators.required]],

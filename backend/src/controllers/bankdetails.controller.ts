@@ -1,15 +1,18 @@
 import { Request, Response } from "express";
 import { BankDetailsService } from "../services"; // Assuming you have a BankDetailsService
-import { BankDetails } from "../models"; // Assuming you have a BankDetails model
+import { BankDetails, BankTransaction } from "../models"; // Assuming you have a BankDetails model
 import { getPagingData } from "../helpers";
 import { sequelize } from "../db";
 import { Op } from "sequelize";
+import { BankTransactionController } from "./banktransaction.controller";
 
 export class BankDetailsController {
     private bankDetailsService: BankDetailsService;
+    private transactionController: BankTransactionController;
 
     constructor() {
         this.bankDetailsService = new BankDetailsService(BankDetails);
+        this.transactionController = new BankTransactionController();
     }
 
     options = {}; // You can add any options you need here
@@ -75,16 +78,23 @@ export class BankDetailsController {
     }
 
     delete(req: Request, res: Response) {
-        this.bankDetailsService.get(req.params.id).then((bankDetails) => {
-            if (bankDetails) {
-                this.bankDetailsService
-                    .delete(req.params.id)
-                    .then(() => res.status(200).json())
-                    .catch((err) => res.status(400).json(err));
-            } else
-                res.status(404).json({
-                    message: `BankDetails id:${req.params.id} does not exist`,
+        this.transactionController.deleteByBankId(req.params.id)
+            .then((item) => {
+                console.log(item);
+                this.bankDetailsService.get(req.params.id).then((bankDetails) => {
+                    if (bankDetails) {
+                        this.bankDetailsService
+                            .delete(req.params.id)
+                            .then(() => {
+                                res.status(200).json();
+                            })
+                            .catch((err) => res.status(400).json(err));
+                    } else
+                        res.status(404).json({
+                            message: `BankDetails id:${req.params.id} does not exist`,
+                        });
                 });
-        });
+            });
+        
     }
 }

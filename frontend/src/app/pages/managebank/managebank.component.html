@@ -1,9 +1,9 @@
 <div class="flex gap-10">
   <div class="flex-grow">
     <div class="flex items-center justify-between mb-4">
-      <button nz-button [routerLink]="['/vendor/edit', -1]">
+      <button nz-button [routerLink]="['/add-bank', -1]">
         <span nz-icon nzType="plus"></span>
-        Add Vendor
+        Add Bank
       </button>
       <nz-input-group [nzSuffix]="suffixIconSearch" class="w-[220px]">
         <input
@@ -17,13 +17,13 @@
     <nz-table
       #basicTable
       nzSize="small"
-      [nzData]="vendors"
+      [nzData]="banks"
       [nzLoading]="isLoading"
       [nzShowPagination]="false"
       [nzFrontPagination]="false"
       [(nzPageSize)]="pageSize"
       [(nzPageIndex)]="pageIndex"
-      (nzQueryParams)="getVendors($event)"
+      (nzQueryParams)="getBanks($event)"
       class="shadow rounded"
     >
       <thead>
@@ -33,16 +33,17 @@
           <th>A/c Name</th>
           <th>A/c Number</th>
           <th>Branch</th>
-          <th>Balance</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let bank of banks">
+          <td>{{ bank.id }}</td>
           <td>{{ bank.bank_name }}</td>
           <td>{{ bank.account_name }}</td>
           <td>{{ bank.account_no }}</td>
           <td>{{ bank.branch }}</td>
+<<<<<<< Updated upstream
           <td>{{ bank.account_type }}</td>
           
           <td>
@@ -56,6 +57,8 @@
               {{ s.status }}
             </span>
           </td>
+=======
+>>>>>>> Stashed changes
           <td>
             <div class="flex gap-4 items-center">
               <span
@@ -67,8 +70,13 @@
                 nzTooltipTitle="Delete"
                 nz-popconfirm
                 nzPopconfirmPlacement="bottom"
+<<<<<<< Updated upstream
                 nzPopconfirmTitle="Are you sure delete this bank?"
                 (nzOnConfirm)="deleteVendor(s.id)"
+=======
+                nzPopconfirmTitle="Are you sure delete this customer?"
+                (nzOnConfirm)="deleteBank(bank.id)"
+>>>>>>> Stashed changes
               ></span>
               <span
                 class="text-blue-400 text-base cursor-pointer"
@@ -77,7 +85,7 @@
                 nzTheme="outline"
                 nz-tooltip
                 nzTooltipTitle="Edit"
-                [routerLink]="['/vendor/edit', s.id]"
+                [routerLink]="['/add-bank', bank.id]"
               ></span>
               <!-- (click)="customerId = s.id" -->
             </div>
