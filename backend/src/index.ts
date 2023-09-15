@@ -24,6 +24,7 @@ import {
   BankDetailsRoutes,
   BankTransactionRoutes,
   ExpenseRoutes,
+  ExpenseItemRoutes,
 } from "./routes";
 
 import {
@@ -53,6 +54,7 @@ import {
   BankDetails,
   BankTransaction,
   Expense,
+  ExpenseItem,
 } from "./models";
 
 import { verifyToken } from "./middleware";
@@ -108,6 +110,7 @@ InvoiceMasterItem.sync();
 BankDetails.sync();
 BankTransaction.sync();
 Expense.sync();
+ExpenseItem.sync();
 
 Customer.sync();
 Vendor.sync();
@@ -136,7 +139,7 @@ app.use("/api/InvoiceMaster", verifyToken, new InvoiceMasterRoutes().getRouter()
 app.use("/api/BankDetails" ,verifyToken,  new BankDetailsRoutes().getRouter());
 app.use("/api/BankTransaction" ,verifyToken,  new BankTransactionRoutes().getRouter());
 app.use("/api/Expense" ,verifyToken,  new ExpenseRoutes().getRouter());
-
+app.use("/api/ExpenseItem" ,  new ExpenseItemRoutes().getRouter());
 
 app.use(
   "/api/transport-bill",
