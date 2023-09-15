@@ -135,7 +135,7 @@ app.use("/api/quotation", verifyToken, new QuotationRoutes().getRouter());
 app.use("/api/InvoiceMaster", verifyToken, new InvoiceMasterRoutes().getRouter());
 app.use("/api/BankDetails" ,verifyToken,  new BankDetailsRoutes().getRouter());
 app.use("/api/BankTransaction" ,verifyToken,  new BankTransactionRoutes().getRouter());
-app.use("/api/Expense" ,  new ExpenseRoutes().getRouter());
+app.use("/api/Expense" ,verifyToken,  new ExpenseRoutes().getRouter());
 
 
 app.use(
