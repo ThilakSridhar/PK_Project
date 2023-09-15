@@ -97,7 +97,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: "transaction-bank",
+        path: "transaction-bank/:id",
         component: BankTransactionComponent,
         canActivate: [AuthGuard],
       },

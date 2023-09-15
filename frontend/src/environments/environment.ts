@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://fictional-bassoon-p56xgjxq94ph6p-3000.app.github.dev/api",
+  apiUrl: "https://congenial-funicular-r5xjr4jvwww3xqvp-3000.app.github.dev/api",
 };
 
 /*

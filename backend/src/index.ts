@@ -23,6 +23,7 @@ import {
   QuotationRoutes,
   BankDetailsRoutes,
   BankTransactionRoutes,
+  ExpenseRoutes,
 } from "./routes";
 
 import {
@@ -51,6 +52,7 @@ import {
   InvoiceMasterItem,
   BankDetails,
   BankTransaction,
+  Expense,
 } from "./models";
 
 import { verifyToken } from "./middleware";
@@ -60,7 +62,7 @@ import { InvoiceMasterRoutes } from "./routes/invoicemaster.routes";
 
 const app = express();
 
-app.use(cors({ origin: "https://fictional-bassoon-p56xgjxq94ph6p-4200.app.github.dev" }));
+app.use(cors({ origin: "*" }));
 
 app.use(express.static(__dirname + "/files", { index: false }));
 
@@ -105,6 +107,7 @@ InvoiceMaster.sync();
 InvoiceMasterItem.sync();
 BankDetails.sync();
 BankTransaction.sync();
+Expense.sync();
 
 Customer.sync();
 Vendor.sync();
@@ -132,6 +135,7 @@ app.use("/api/quotation", verifyToken, new QuotationRoutes().getRouter());
 app.use("/api/InvoiceMaster", verifyToken, new InvoiceMasterRoutes().getRouter());
 app.use("/api/BankDetails" ,verifyToken,  new BankDetailsRoutes().getRouter());
 app.use("/api/BankTransaction" ,verifyToken,  new BankTransactionRoutes().getRouter());
+app.use("/api/Expense" ,  new ExpenseRoutes().getRouter());
 
 
 app.use(

@@ -1,102 +1,35 @@
-<!-- <h1 class="text-lg font-medium text-center">
+<h1 class="text-lg font-medium text-center">
     Add Transaction
   </h1>
 <div class="all" nzLayout="vertical">
   <!-- <form nz-form [formGroup]="form" nzLayout="vertical"> -->
-
-<form nz-form>
 <div class="grid grid-cols-1">
     <div class="w-[700px]">
         <div class="grid grid-cols-1 gap-x-10">
-            <form nz-form  >    
+      <form nz-form [formGroup]="banktransactionForm" >     
                 <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Date">Date</nz-form-label>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="date">Date</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Date!">
-                      <input nz-input placeholder="Enter the Date" type="date" formControlName="Date" id="date" />
+                      <input nz-input placeholder="Enter the Date" type="date" formControlName="date" id="date" />
                      </nz-form-control>
                 </nz-form-item>
-
-                <!-- <nz-form-item>
-                <nz-dropdown-menu #menu="nzDropdownMenu">
-                    <div class="shadow-lg rounded-md border border-gray-200 ">
-              
-                      <div class="m-2 py-1.5 px-2 border border-b-gray-200 rounded-md flex items-center">
-                        <i class="ph-magnifying-glass mr-1"></i>
-                        <input type="text" placeholder="Account_no"/>
-                      </div>
-              
-                      <div style="max-height:200px;overflow:auto;" class="border border-t-gray-400">
-                        <ul nz-menu>
-                          <li *ngFor="let i of [0,0]" class="py-2" nz-menu-item>
-                            Debit(+)
-                            Credit(-)
-                          </li>
-                        </ul> 
-                      </div>
-                    </div>
-                  </nz-dropdown-menu>
-                </nz-form-item> -->
-                <!-- <nz-form-item>
-                <nz-radio-group>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="AccountType">Account Type</nz-form-label>
-                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Account Type!">
-                    <label nz-radio nzValue="Debit">Debit(+)</label>
-                    <label nz-radio nzValue="Credit">Credit(-)</label>
-                </nz-form-control>
-                </nz-radio-group>
-                </nz-form-item> -->
-                <!-- <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Date">Account Type</nz-form-label>
-                <nz-input-group>
-                    <nz-select [ngModel]="'Account Type'">
-                      <nz-option [nzLabel]="'Debit(+)'" [nzValue]="'Debit(+)'"  formControlName="Date"></nz-option>
-                      <nz-option [nzLabel]="'Credit(-)'" [nzValue]="'Credit(-)'"  formControlName="Date"></nz-option>
-                    </nz-select>
-                </nz-input-group>
-                </nz-form-item> -->
-
-                <!-- <nz-form-item>
-                    <nz-form-label nzRequired>Account Type</nz-form-label>
-                    <nz-select
-            ngModel="selectedValue"
-            [nzAllowClear]="true"
-            [nzPlaceHolder]="'Select or Enter an Option'"
-            [nzShowSearch]="true"
-            (nzOnSearch)="onInputChanged($event)">
-            <nz-option *ngFor="let option of options" [nzValue]="Debit(+)" [nzLabel]="Debit(+)"></nz-option>
-            <nz-option *ngFor="let option of options" [nzValue]="Credit(-)" [nzLabel]="Credit(-)"></nz-option>
-          </nz-select>
-          <br/>
-          
-          <nz-input
-            ngModel="inputValue"
-            nzPlaceHolder="'Enter a new option'"
-            nzSize="'default'"></nz-input>
-            </nz-form-item> -->
 
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bankname">Account Number</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Account Name!">
-                  <input nz-input placeholder="Enter the Account Name" type="text" formControlName="account_no" id="account_no" />
+                  <input nz-input placeholder="Enter the Account Name" type="text" formControlName="bank_id" id="bank_account_number" />
                  </nz-form-control>
             </nz-form-item>
 
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Account Type</nz-form-label>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Transaction Type</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please select the material!">
-                  <nz-select formControlName="inventoryId" class="w-full">
-                    <nz-option [nzLabel]="'Debit(+)'" [nzValue]="'Debit(+)'"  formControlName="Date"></nz-option>
-                    <nz-option [nzLabel]="'Credit(-)'" [nzValue]="'Credit(-)'"  formControlName="Date"></nz-option>
+                  <nz-select formControlName="transaction_type" class="w-full">
+                    <nz-option [nzLabel]="'Debit(+)'" [nzValue]="'Debit(+)'"></nz-option>
+                    <nz-option [nzLabel]="'Credit(-)'" [nzValue]="'Credit(-)'"></nz-option>
                   </nz-select>
                 </nz-form-control>
               </nz-form-item>
-    
-                <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bankname">Bank Name</nz-form-label>
-                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Bank Name!">
-                      <input nz-input placeholder="Enter the Bank Name" type="text" formControlName="bank_name" id="bank_name" />
-                     </nz-form-control>
-                </nz-form-item>
     
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">Withdraw/Deposite ID</nz-form-label>
@@ -111,38 +44,46 @@
                       <input nz-input placeholder="Enter the Amount" type="number" formControlName="amount" id="amount" />
                      </nz-form-control>
                 </nz-form-item>
+
+                <nz-form-item>
+                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">Description</nz-form-label>
+                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="enter the Description!">
+                    <input nz-input placeholder="Enter the Description" nzAutosize="{ minRows: 2, maxRows: 6 }" type="text" formControlName="description" id="description" />
+                   </nz-form-control>
+              </nz-form-item>
     
-            </form>
+           
               
-        </div> 
+         
         <br>
         
         
 
-    
-        
-  
-        <div class="flex gap-4">
+        <div class="flex gap-10">
           <button
             nz-button
             [nzType]="'primary'"
             class="flex-grow"
-            
-          >save
-            <!-- {{ billId > 0 ? "Save" : "Add" }}  (click)="submit()"  -->
+            size="1px"
+            (click)="submitBankTransaction()" 
+          >
+            {{ transactionId > 0 ? "Save" : "Add" }}  
           </button>
           <button
             nz-button
             [nzType]="'default'"
             class="flex-grow"
-            [routerLink]="['/transaction-bank']"
-          >
-            Reset
+            routerLink="['/bank-transaction']">
+            cancel
           </button>
         </div>
+
+      </form>
+      </div>
+    </div>
       </div>
       
-</div> -->
+</div> 
 
 <!-- NEW HTML FORM CREATED USING ADDBANK PAGE -->
 <!-- 
@@ -195,7 +136,7 @@
                   </nz-form-control>
               </nz-form-item>
 
-              <!-- Add other form items as needed -->
+               Add other form items as needed -->
 
               <!-- <div class="flex gap-10">
                   <button nz-button [nzType]="'primary'" class="flex-grow" size="1px" (click)="submitBankTransaction()">
@@ -208,5 +149,5 @@
           </form>
       </div>
   </div>
-</div> --> -->
+</div> --> 
 
