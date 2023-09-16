@@ -15,6 +15,8 @@ export class BankTransactionRoutes {
         // Get all Bank Transactions
         this.router.get("/", (req, res) => this.controller.getAll(req, res));
 
+        this.router.get("/page", (req, res) => this.controller.getPaged(req, res))
+
         // Get Bank Transaction by ID
         this.router.get("/:id", (req, res) =>
             this.controller.getById(req, res)
@@ -28,6 +30,7 @@ export class BankTransactionRoutes {
         this.router.delete("/:id", (req, res) =>
             this.controller.delete(req, res)
         );
+
     }
 
     public getRouter() {

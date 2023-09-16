@@ -54,7 +54,9 @@ export class BankDetailsController {
             branch,
             account_type,
         };
-        if (id && id > 0) bankDetails = { ...bankDetails, id };
+        if (id > 0) bankDetails = { ...bankDetails, id };
+        console.log(bankDetails, id);
+        
 
         const t = await sequelize.transaction();
 

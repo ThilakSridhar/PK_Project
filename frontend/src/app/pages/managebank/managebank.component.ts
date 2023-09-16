@@ -53,6 +53,8 @@ export class ManagebankComponent implements OnInit {
     this.getBanks();
   }
 
+  getAccountNoDisplay = (accountNo: any) => parseInt(accountNo);
+
   getBanks(p?: any) {
     this.isLoading = true;
     let params = new HttpParams()

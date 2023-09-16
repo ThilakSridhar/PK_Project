@@ -1,153 +1,171 @@
 <h1 class="text-lg font-medium text-center">
-    Add Transaction
-  </h1>
+  Add Transaction
+</h1>
 <div class="all" nzLayout="vertical">
-  <!-- <form nz-form [formGroup]="form" nzLayout="vertical"> -->
+<!-- <form nz-form [formGroup]="form" nzLayout="vertical"> -->
 <div class="grid grid-cols-1">
-    <div class="w-[700px]">
-        <div class="grid grid-cols-1 gap-x-10">
-      <form nz-form [formGroup]="banktransactionForm" >     
-                <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="date">Date</nz-form-label>
-                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Date!">
-                      <input nz-input placeholder="Enter the Date" type="date" formControlName="date" id="date" />
-                     </nz-form-control>
-                </nz-form-item>
-
-            <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bankname">Account Number</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Account Name!">
-                  <input nz-input placeholder="Enter the Account Name" type="text" formControlName="bank_id" id="bank_account_number" />
-                 </nz-form-control>
-            </nz-form-item>
-
-            <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Transaction Type</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please select the material!">
-                  <nz-select formControlName="transaction_type" class="w-full">
-                    <nz-option [nzLabel]="'Debit(+)'" [nzValue]="'Debit(+)'"></nz-option>
-                    <nz-option [nzLabel]="'Credit(-)'" [nzValue]="'Credit(-)'"></nz-option>
-                  </nz-select>
-                </nz-form-control>
-              </nz-form-item>
-    
-                <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">Withdraw/Deposite ID</nz-form-label>
-                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Withdraw/Deposite ID!">
-                      <input nz-input placeholder="Enter the Withdraw/Deposite ID" type="text" formControlName="withdraw_id" id="withdraw_id" />
-                     </nz-form-control>
-                </nz-form-item>
-    
-                <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Amount">Amount</nz-form-label>
-                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Amount!">
-                      <input nz-input placeholder="Enter the Amount" type="number" formControlName="amount" id="amount" />
-                     </nz-form-control>
-                </nz-form-item>
-
-                <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">Description</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="enter the Description!">
-                    <input nz-input placeholder="Enter the Description" nzAutosize="{ minRows: 2, maxRows: 6 }" type="text" formControlName="description" id="description" />
+  <div class="w-[700px]">
+      <div class="grid grid-cols-1 gap-x-10">
+    <form nz-form [formGroup]="banktransactionForm" >     
+              <nz-form-item>
+                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="date">Date</nz-form-label>
+                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Date!">
+                    <input nz-input placeholder="Enter the Date" type="date" formControlName="date" id="date" />
                    </nz-form-control>
               </nz-form-item>
-    
-           
-              
+
+          <!-- <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bankname">Account Number</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Account Name!">
+                <input nz-input placeholder="Enter the Account Name" type="text" formControlName="bank_id" id="bank_account_number" />
+               </nz-form-control>
+          </nz-form-item> -->
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Bank</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Date!">
+            <nz-select
+              formControlName="bank_id"
+              nzPlaceHolder="Bank"
+              (ngModelChange)="onBankSelected($event)"
+              nzShowSearch
+            >
+              <nz-option
+                *ngFor="let bank of banks"
+                [nzLabel]="getBankDisplay(bank)"
+                [nzValue]="bank.id"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+          <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Transaction Type</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please select the material!">
+                <nz-select formControlName="transaction_type" class="w-full" nzShowSearch>
+                  <nz-option [nzLabel]="getTransactionType(false)" [nzValue]=false></nz-option>
+                  <nz-option [nzLabel]="getTransactionType(true)" [nzValue]=true></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+  
+              <nz-form-item>
+                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">Withdraw/Deposite ID</nz-form-label>
+                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Withdraw/Deposite ID!">
+                    <input nz-input placeholder="Enter the Withdraw/Deposite ID" type="text" formControlName="withdraw_id" id="withdraw_id" />
+                   </nz-form-control>
+              </nz-form-item>
+  
+              <nz-form-item>
+                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Amount">Amount</nz-form-label>
+                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Amount!">
+                    <input nz-input placeholder="Enter the Amount" type="number" formControlName="amount" id="amount" />
+                   </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="A/CNo">Description</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="enter the Description!">
+                  <input nz-input placeholder="Enter the Description" nzAutosize="{ minRows: 2, maxRows: 6 }" type="text" formControlName="description" id="description" />
+                 </nz-form-control>
+            </nz-form-item>
+  
          
-        <br>
-        
-        
-
-        <div class="flex gap-10">
-          <button
-            nz-button
-            [nzType]="'primary'"
-            class="flex-grow"
-            size="1px"
-            (click)="submitBankTransaction()" 
-          >
-            {{ transactionId > 0 ? "Save" : "Add" }}  
-          </button>
-          <button
-            nz-button
-            [nzType]="'default'"
-            class="flex-grow"
-            routerLink="['/bank-transaction']">
-            cancel
-          </button>
-        </div>
-
-      </form>
-      </div>
-    </div>
-      </div>
+            
+       
+      <br>
       
+      
+
+      <div class="flex gap-10">
+        <button
+          nz-button
+          [nzType]="'primary'"
+          class="flex-grow"
+          size="1px"
+          (click)="submitBankTransaction()" 
+        >
+          {{ transactionId > 0 ? "Save" : "Add" }}  
+        </button>
+        <button
+          nz-button
+          [nzType]="'default'"
+          class="flex-grow"
+          routerLink="['/bank-transaction']">
+          cancel
+        </button>
+      </div>
+
+    </form>
+    </div>
+  </div>
+    </div>
+    
 </div> 
 
 <!-- NEW HTML FORM CREATED USING ADDBANK PAGE -->
 <!-- 
 <h1 class="text-lg font-medium text-center">
-  Bank Transaction
+Bank Transaction
 </h1>
 <div class="all">
-  <div class="w-[900px]">
-      <div class="grid grid-cols-1 gap-x-100">
-          <form nz-form [formGroup]="bankTransactionForm">
-              <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">ID</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid ID!">
-                      <input nz-input placeholder="Enter the ID" type="text" formControlName="id" id="id" />
-                  </nz-form-control>
-              </nz-form-item>
+<div class="w-[900px]">
+    <div class="grid grid-cols-1 gap-x-100">
+        <form nz-form [formGroup]="bankTransactionForm">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">ID</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid ID!">
+                    <input nz-input placeholder="Enter the ID" type="text" formControlName="id" id="id" />
+                </nz-form-control>
+            </nz-form-item>
 
-              <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="date">Date</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Date!">
-                      <input nz-input placeholder="Enter the Date" type="date" formControlName="date" id="date" />
-                  </nz-form-control>
-              </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="date">Date</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Date!">
+                    <input nz-input placeholder="Enter the Date" type="date" formControlName="date" id="date" />
+                </nz-form-control>
+            </nz-form-item>
 
-              <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bank_id">Bank ID</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Bank ID!">
-                      <input nz-input placeholder="Enter the Bank ID" type="text" formControlName="bank_id" id="bank_id" />
-                  </nz-form-control>
-              </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bank_id">Bank ID</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Bank ID!">
+                    <input nz-input placeholder="Enter the Bank ID" type="text" formControlName="bank_id" id="bank_id" />
+                </nz-form-control>
+            </nz-form-item>
 
-              <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="withdraw_id">Withdraw ID</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Withdraw ID!">
-                      <input nz-input placeholder="Enter the Withdraw ID" type="text" formControlName="withdraw_id" id="withdraw_id" />
-                  </nz-form-control>
-              </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="withdraw_id">Withdraw ID</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Withdraw ID!">
+                    <input nz-input placeholder="Enter the Withdraw ID" type="text" formControlName="withdraw_id" id="withdraw_id" />
+                </nz-form-control>
+            </nz-form-item>
 
-              <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="amount">Amount</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Amount!">
-                      <input nz-input placeholder="Enter the Amount" type="number" formControlName="amount" id="amount" />
-                  </nz-form-control>
-              </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="amount">Amount</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Amount!">
+                    <input nz-input placeholder="Enter the Amount" type="number" formControlName="amount" id="amount" />
+                </nz-form-control>
+            </nz-form-item>
 
-              <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="description">Description</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Description!">
-                      <input nz-input placeholder="Enter the Description" type="text" formControlName="description" id="description" />
-                  </nz-form-control>
-              </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="description">Description</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Description!">
+                    <input nz-input placeholder="Enter the Description" type="text" formControlName="description" id="description" />
+                </nz-form-control>
+            </nz-form-item>
 
-               Add other form items as needed -->
+             Add other form items as needed -->
 
-              <!-- <div class="flex gap-10">
-                  <button nz-button [nzType]="'primary'" class="flex-grow" size="1px" (click)="submitBankTransaction()">
-                      {{ transactionId > 0 ? "Save" : "Add" }}
-                  </button>
-                  <button nz-button [nzType]="'default'" class="flex-grow" [routerLink]="['/proforma-main']">
-                      Cancel
-                  </button>
-              </div>
-          </form>
-      </div>
-  </div>
+            <!-- <div class="flex gap-10">
+                <button nz-button [nzType]="'primary'" class="flex-grow" size="1px" (click)="submitBankTransaction()">
+                    {{ transactionId > 0 ? "Save" : "Add" }}
+                </button>
+                <button nz-button [nzType]="'default'" class="flex-grow" [routerLink]="['/proforma-main']">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 </div> --> 
 

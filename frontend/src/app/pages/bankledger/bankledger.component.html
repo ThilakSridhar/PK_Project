@@ -1,127 +1,108 @@
 
 <h1 class="text-lg font-medium text-center">
-    Bank Ledger
-  </h1>
+  Bank Ledger
+</h1>
 
 <div class="flex gap-10" @fade>
-    <div class="flex-grow">
-      <div class="flex items-center justify-end mb-4">
-        <img height="100px" width="100px" src="../../../assets/pec-logo.png">
-        <h3 align-items="center"><b>kraft auto parts</b>
-            <br>
-            20&21,Vasantham nagar,<br>
-              Thirumudivakkam,<br>
-                Chennai-132<br>
-        </h3>
-        <div class="col">
-          <label for="date">Date :</label>
-          <input type="date" onload="getDate()" class="form-control" id="date" 
-            name="date" >
-            <script>
-              function getDate()
-            {
-              var today = new Date();
-              document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-            }
-            </script>
-            
-      </div>
-      </div>
-      <!-- <nz-table
-        #basicTable
-        nzSize="small"
-        [nzData]="transportBill"
-        [nzLoading]="isLoading"
-        [nzShowPagination]="false"
-        [(nzPageSize)]="pageSize"
-        [(nzPageIndex)]="pageIndex"
-        (nzQueryParams)="getTransportBill($event)"
-        class="shadow rounded"
-      > -->
-      
-      <nz-table>
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Bank Name</th>
-            <th>Description</th>
-            <th>Withdraw/Deposite ID</th>
-            <th>Debit(+)</th>
-            <th>credit(-)</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr *ngFor="let t of basicTable.data">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+  <div class="flex-grow">
+    <div class="flex items-center justify-end mb-4">
+      <img height="100px" width="100px" src="../../../assets/pec-logo.png">
+      <h3 align-items="center"><b>kraft auto parts</b>
+          <br>
+          20&21,Vasantham nagar,<br>
+            Thirumudivakkam,<br>
+              Chennai-132<br>
+      </h3>
+      <div class="col">
+        <label for="date">Date :</label>
+        <input type="date" onload="getDate()" class="form-control" id="date" 
+          name="date" >
+          <script>
+            function getDate()
+          {
+            var today = new Date();
+            document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+          }
+          </script>
+          
+    </div>
+    </div>
+    <!-- <nz-table
+      #basicTable
+      nzSize="small"
+      [nzData]="transportBill"
+      [nzLoading]="isLoading"
+      [nzShowPagination]="false"
+      [(nzPageSize)]="pageSize"
+      [(nzPageIndex)]="pageIndex"
+      (nzQueryParams)="getTransportBill($event)"
+      class="shadow rounded"
+    > -->
+    
+    <nz-table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Bank Name</th>
+          <th>Description</th>
+          <th>Withdraw/Deposite ID</th>
+          <th>Transaction Type</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of bankTransactions">
+          <td>{{ transaction.id }}</td>
+          <td>{{ transaction.bank.account_name }}</td>
+          <td>{{ transaction.description }}</td>
+          <td>{{ transaction.withdraw_id }}</td>
+          <td>{{ getTransactionType(transaction.credit) }}</td>
+          <td>{{ transaction.amount }}</td>
+          <td>
+            <div class="flex gap-4 items-center">
+              <span
+                class="text-red-400 text-base cursor-pointer"
+                nz-icon
+                nzType="delete"
+                nzTheme="outline"
+                nz-tooltip
+                nzTooltipTitle="Delete"
+                nz-popconfirm
+                nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Are you sure delete this bank?"
+                (nzOnConfirm)="deleteBank(transaction.id)"
+              ></span>
+              <span
+                class="text-blue-400 text-base cursor-pointer"
+                nz-icon
+                nzType="edit"
+                nzTheme="outline"
+                nz-tooltip
+                nzTooltipTitle="Edit"
+                [routerLink]="['/transaction-bank', transaction.id]"
+              ></span>
+              <!-- (click)="customerId = s.id" -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+</nz-table>
+</div>
 
-            <td>
-              <div class="flex gap-4 items-center">
-                <span
-                  class="text-red-400 text-base cursor-pointer"
-                  nz-icon
-                  nzType="delete"
-                  nzTheme="outline"
-                  nz-tooltip
-                  nzTooltipTitle="Delete"
-                  nz-popconfirm
-                  nzPopconfirmPlacement="bottom"
-                  nzPopconfirmTitle="Are you sure delete this bill?"
-                  (nzOnConfirm)="deleteTransportBill(t.id)"
-                ></span>
-                <span
-                  class="text-blue-400 text-base cursor-pointer"
-                  nz-icon
-                  nzType="edit"
-                  nzTheme="outline"
-                  nz-tooltip
-                  nzTooltipTitle="Edit"
-                  [routerLink]="['/transport-bill-edit', t.id]"
-                ></span>
-                <span
-                  class="text-blue-400 text-base cursor-pointer"
-                  nz-icon
-                  nzType="printer"
-                  nzTheme="outline"
-                  [routerLink]="['/bill-layout', t.id]"
-                ></span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-      <div class="flex justify-end mt-4">
-        <nz-pagination
-          nzSize="small"
-          [(nzPageIndex)]="pageIndex"
-          [(nzPageSize)]="pageSize"
-          [nzTotal]="total"
-          [nzShowTotal]="rangeTemplate"
-          nzShowSizeChanger
-        ></nz-pagination> -->
-      <!-- </div>
-    </div> -->
-  </nz-table>
-  </div>
-  
-  <ng-template #rangeTemplate let-range="range" let-total>
-    {{ range[0] }}-{{ range[1] }} of {{ total }} items
-  </ng-template>
-  
-  <ng-template #suffixIconSearch>
-    <span nz-icon nzType="search"></span>
-  </ng-template>
-  <!-- <script>
-    function getDate(){
-    var today = new Date();
+<ng-template #rangeTemplate let-range="range" let-total>
+  {{ range[0] }}-{{ range[1] }} of {{ total }} items
+</ng-template>
+
+<ng-template #suffixIconSearch>
+  <span nz-icon nzType="search"></span>
+</ng-template>
+<!-- <script>
+  function getDate(){
+  var today = new Date();
 
 document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 
 
 }
-  </script> -->
+</script> -->

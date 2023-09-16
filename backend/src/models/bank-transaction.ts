@@ -39,6 +39,10 @@ BankTransaction.init(
             type: DataTypes.STRING,
             allowNull: true, // Adjust as needed
         },
+        credit: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        }
     },
     {
         sequelize,
@@ -47,5 +51,17 @@ BankTransaction.init(
         underscored: true,
     }
 );
+
+BankTransaction.belongsTo(BankDetails, {
+	foreignKey: "bank_id",
+    as: "bank",
+	onDelete: "cascade",
+});
+
+BankDetails.hasMany(BankTransaction, {
+	foreignKey: "bank_id",
+	as: "bankTransaction",
+	onDelete: "cascade",
+});
 
 export default BankTransaction;
