@@ -157,6 +157,43 @@ export class BaseLayoutComponent implements OnInit {
           ],
         },
         {
+          title: "Expense",
+          icon: "file-done",
+          children: [
+            {
+                level: 2,
+                title: "Add Expense Item",
+                link: "/add-expense-item/-1",
+            },
+            {
+                level: 2,
+                title: "Manage Expense Item",
+                link: "/manage-expense-item",
+            },
+            {
+                level: 2,
+                title: "Add Expense",
+                link: "/add-expense/-1",
+            },
+            {
+                level: 2,
+                title: "Manage Expense",
+                link: "/manage-expense",
+            },
+            {
+              level: 2,
+              title: "Expense Statement",
+              link: "/expense-statement",
+          },
+        ],
+        },
+
+
+
+
+
+
+        {
           title: "Item Master",
           icon: "database",
           link: "/item-master",

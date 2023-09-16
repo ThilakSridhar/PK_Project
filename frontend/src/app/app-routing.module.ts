@@ -30,6 +30,11 @@ import { BankTransactionComponent } from "./pages/bank-transaction/bank-transact
 import { ManagebankComponent } from "./pages/managebank/managebank.component";
 import { AddbankComponent } from "./pages/addbank/addbank.component";
 import { BankledgerComponent } from "./pages/bankledger/bankledger.component";
+import { AddExpenseComponent } from "./pages/addexpense/addexpense.component";
+import { AddExpenseItemComponent } from "./pages/add-expense-item/add-expense-item.component";
+import { ExpensestatementComponent } from "./pages/expensestatement/expensestatement.component";
+import { ManageExpenseItemComponent } from "./pages/manage-expense-item/manage-expense-item.component";
+import { ManageexpenseComponent } from "./pages/manageexpense/manageexpense.component";
 
 const routes: Routes = [
   {
@@ -106,6 +111,43 @@ const routes: Routes = [
         component: BankledgerComponent,
         canActivate: [AuthGuard],
       },
+
+
+      
+      {
+        path: "add-expense/:id",
+        component: AddExpenseComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "add-expense-item/:id",
+        component: AddExpenseItemComponent,
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: "manage-expense",
+        component: ManageexpenseComponent,
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: "manage-expense-item",
+        component: ManageExpenseItemComponent,
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: "expense-statement",
+        component: ExpensestatementComponent,
+        canActivate: [AuthGuard],
+      },
+
+
+      
+
+
+
       {
         path: "quotation-invoice-edit",
         component: QuotationInvoiceComponent,

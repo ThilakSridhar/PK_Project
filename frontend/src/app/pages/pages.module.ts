@@ -29,6 +29,10 @@ import { AddbankComponent } from './addbank/addbank.component';
 import { ManagebankComponent } from './managebank/managebank.component';
 import { BankTransactionComponent } from './bank-transaction/bank-transaction.component';
 import { BankledgerComponent } from './bankledger/bankledger.component';
+import { ManageexpenseComponent } from './manageexpense/manageexpense.component';
+import { AddExpenseItemComponent } from './add-expense-item/add-expense-item.component';
+import { ManageExpenseItemComponent } from './manage-expense-item/manage-expense-item.component';
+import { ExpensestatementComponent } from './expensestatement/expensestatement.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,10 @@ import { BankledgerComponent } from './bankledger/bankledger.component';
     ManagebankComponent,
     BankTransactionComponent,
     BankledgerComponent,
+    ManageexpenseComponent,
+    AddExpenseItemComponent,
+    ManageExpenseItemComponent,
+    ExpensestatementComponent,
   ],
   imports: [
     CommonModule,
